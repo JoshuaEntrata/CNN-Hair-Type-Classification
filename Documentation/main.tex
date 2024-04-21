@@ -1,0 +1,38 @@
+\input{preamble.tex}
+
+\title{Study}
+\author{Writer}
+\date{}
+
+\begin{document}
+
+    \maketitle
+
+    \begin{abstract}
+        \blindtext[2]
+
+        \vspace{0.5\baselineskip}
+        \noindent
+        \textbf{Keywords:} Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur.
+    \end{abstract}
+
+    \begin{multicols}{2}
+        \input{intro.tex}
+        \input{method.tex}
+        \input{results.tex}
+        \input{discussion.tex}
+        \input{conc.tex}
+    \end{multicols}
+
+    % Include in the bibliography all that was uncited
+    \cite{mitlohner_characteristics_2016}
+
+    this is a reference \citep{gaines_emotional_1983} vs the regular reference \cite{gaines_emotional_1983}.
+    \nocite{*}
+
+    \newpage
+    \bibliographystyle{apalike2}
+    \bibliography{citations} % Put the file name only of the .bib files
+    % https://zbib.org/59898e1965a74f2f9d57017519db0564
+
+\end{document}

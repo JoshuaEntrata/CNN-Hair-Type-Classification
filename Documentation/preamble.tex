@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{amsmath, amsthm, amsfonts, geometry, graphicx, blindtext}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{tabularx, booktabs, caption, float}
+\usepackage{tikz, pgfplots}
+\usepackage{multicol}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\pgfplotsset{compat=1.18, width=0.9\linewidth}
+
+\captionsetup[table]{singlelinecheck=false, justification=raggedright, format=plain}
+
+\setlength{\parindent}{1cm}
+% \fontsize{8pt}{10pt}\selectfont
+% \spacing{1.5}
+
+\newgeometry{
+    top = 0.75in,
+    inner = 0.75in,
+    outer = 0.75in,
+    bottom = 0.75in
+}
+
+\renewcommand{\thesection}{\Roman{section}}
+\titleformat{\section}
+    {\fontsize{1em}{1.2em}\bfseries\centering\uppercase}{\thesection}{1em}{}
+
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\titleformat{\subsection}
+    {\fontsize{1em}{1.2em}\bfseries}{\thesubsection}{1em}{}
+
+% \renewcommand{\thechapter}{\Roman{chapter}}
+
+% For the chapter heading that has the title name after the line of the chapter number
+% \titleformat{\chapter}[display]
+    % {\fontsize{2em}{2.2em}\bfseries\centering}{\chaptertitlename\ \thechapter}{1em}{}
+    % {\fontsize{2em}{2.2em}\bfseries\centering}{\thechapter}{0.25em}{}
+
+% For the chapter heading that have the title name and chapter number in the same line
+% \titleformat{\chapter}[hang]
+%   {\fontsize{2em}{2.2em}\bfseries\centering\uppercase}
+%   {\chaptertitlename\ \thechapter}{1em}{}
