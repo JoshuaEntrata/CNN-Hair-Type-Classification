@@ -1,3 +1,12 @@
 hair_types
 venv
 dump
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.lot
+*.lof
+*.toc
+*.gz

@@ -1,0 +1,23 @@
+## Results vs Discussion Section
+
+Results
+1. Refer to your table or figure and state the main trend
+    - Table 3 shows that Spam Filter A correctly filtered more junk emails than Filter B
+1. Support the trend with data
+    - Filter A correctly filtered... The average difference is...
+1. (If needed) Note any additional, secondary trends and support them with data
+    - In addition... Figure 1 also shows...
+1. (If needed) Note any exceptions to your main trends or unexpected outcomes.
+    - However...
+
+Discussion
+1. (If needed) Provide an explanation
+    - A feasible explanation is... This trend can be explained by...
+1. (If needed) Compare to other research
+    - X is consistent with X's finding... In contrast, Y found...
+1. (If needed) Evaluate whether the findings support or contradict a hypothesis
+1. State the bottom line: what does the data mean?
+    - These findings overall suggest...
+    - These data indicate...
+
+[Reference](https://writingcenter.gmu.edu/writing-resources/imrad/writing-an-imrad-report)
