@@ -35,7 +35,7 @@ Initaially, we tried applying several data augmentation technicques, such as ran
 
 \subsubsection{Splitting Dataset}
 
-To ensure generalizability of this model, we utilized Tensorflow's `image_dataset_from_directory` method to split the image data into training and validation datasets. 20 percent of the data was allocated for validation. Additionally, we resize all images to a uniform `(256,256)' for consistency and batch them in sizes of 64. Splitting the data this way helps prevent overfitting by ensuring that the model does not memorize the training data and allows us to fine-tune the model parameters based on the performance metrics gathered from validation set.
+To ensure generalizability of this model, we utilized Tensorflow's `image_dataset_from_directory` method to split the image data into training and validation datasets. 20 \% of the data was allocated for validation. Additionally, we resize all images to a uniform \(256 \times 256\) pixels for consistency and batch them in sizes of 64. Splitting the data this way helps prevent overfitting by ensuring that the model does not memorize the training data and allows us to fine-tune the model parameters based on the performance metrics gathered from validation set.
 
 \subsubsection{Sobel Edge Detection}
 
@@ -46,7 +46,7 @@ We generated 9 samples from the dataset to display sobel edges applied images.
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{figures/sobel_edge_images.png}
   \caption{Hair Types Example with Sobel Edge}
-  \label{fig:hairtypes}
+  \label{fig:sobel_edge_hairtypes}
 \end{figure}
 
 \subsection{Modeling}
@@ -57,7 +57,7 @@ In this step, we constructed a convolutional neural network (CNN) model using th
 
 The architecture of our convolutional neural network (CNN) begins with the `Sequential` model framework from Keras, which allows layers to be added sequentially. 
 
-1. Input Layer: This layer specifies the shape of the input data, which is 256x256, and adds three color channgels (RGB), making it `(256, 256, 3)`.
+1. Input Layer: This layer specifies the shape of the input data, which is 256x256, and adds three color channgels (RGB), making it \(256, 256, 3\).
 
 2. Rescaling Layer: After the input layer, a `Rescaling` layer npormalizes the pixel values of the images from a range of 0 to 255 to a range of 0 to 1. This is important because it helps the model converge faster during the training stage.
 
