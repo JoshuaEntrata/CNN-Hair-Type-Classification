@@ -75,21 +75,16 @@ The use of sobel edge detection help improved object detection and segmentation,
 
 \subsection{Modeling}
 
-\subsubsection{Convolutional Layers}
 
+% explain first the simple model. creating cnn model needs to find the balance between the appropriate amount of convolutional layers to be used and the complexity of the model. this is without dropout and batchnormalization
 
-\subsubsection{Pooling Layers}
+%  we commonly use relu for activation function but what if we use leakyrelu. mention the pros of leakyrelu and show the performance
 
-\subsubsection{Batch Normalization}
+%  using flatten only gives a very high training accuracy but at the expense of low validation accuracy. it always overfits so lets see the results
 
-\subsubsection{Dropout Layers}
+%  we also tried experimenting with using many convolutional layers and using globalaverage pooling only. let's see thje results of using globalaveragepooling and this complex layers
 
-\subsubsection{GlobalAveragePooling2d and Flattening}
+% discuss that there are scenarios that we can observe wherein the validation accuracy doesnt change in many epochs
 
-% discuss here the changing of hyperparameters in the cnn model
-
-
-\subsubsection{Training the Model}
-
-% discuss the experiments done in the compilation and training of datasets
+% show the experiments that resulted to the creation of our model
 
