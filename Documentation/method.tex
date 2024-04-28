@@ -13,7 +13,7 @@ Later in experimentation, we will see how customizing the CNN can affect perform
 
 \subsubsection{Loading of Images}
 
-A folder named \texttt{hair\_types} was manually imported in the repository containing 1000 images. Inside that folder has subdirectories for each hair type. Python Imaging Library (PIL) library was used to create a custom function of validating the images that was imported. It ensures that none of these images are corrupted and adhere to specific formats, such as PNG, JPG, and BMP. We exclude files that are not accepted by Tensorflow and does not match the specific formats, such as .WebP. After loading these images, 14 images were deleted and one image with a file type of .gif was also detected, but we didn't remove it because it is still valid for this experiment. This step is important to minimize potential issues during model training.
+A folder named \texttt{hair\_types} was manually imported in the repository containing 1000 images. Inside that folder has subdirectories for each hair type. Python Imaging Library (PIL) library was used to create a custom function of validating the images that was imported. It ensures that none of these images are corrupted and adhere to specific formats, such as PNG, JPG, and BMP. We excluded files that are not accepted by Tensorflow and does not match the specific formats, such as .WebP. After loading these images, 14 images were deleted and one image with a file type of .gif was also detected, but we didn't remove it because it is still valid for this experiment. This step is important to minimize potential issues during model training.
 
 \subsubsection{Image Categorization}
 
@@ -21,7 +21,7 @@ This step involves segrating the images into three groups based on hair type lab
 
 \subsubsection{Manual Inspection}
 
-To ensure that no invalid images were overlooked, we manually inspected the images through file explorer. Through this inspection, it was detected that there is one image in \texttt{Straight\_Hair} subdirectory that is just a microphone logo. Thus, excluding this is beneficial to prevent the model learning unnecessary and wrong information.
+To ensure the integiry of our dataset, we manually inspected each image via the file explorer. During the inspection, we identified irrelevant image of a microphone logo found in the subdirectory folder of \texttt{Straight\_Hair}. Removing this image was crucial to prevent the model from leaning incorrect and unnecessary information.
 
 \subsubsection{Image Display}
 

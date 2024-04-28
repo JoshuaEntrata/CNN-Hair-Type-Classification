@@ -26,9 +26,9 @@ The models were evaluated under four different preprocessing scenarios to assess
 
 \begin{itemize}
     \item No preprocessing
-    \item With Sobel Edge Detection only
-    \item With Data Augmentation only
-    \item With both Sobel Edge Detection and Data Augmentation
+    \item Sobel Edge Detection only
+    \item Data Augmentation only
+    \item Both Sobel Edge Detection and Data Augmentation
 \end{itemize}
 
 \begin{table*}[ht]
@@ -40,9 +40,9 @@ The models were evaluated under four different preprocessing scenarios to assess
   Preprocessing Scenario & Training Accuracy & Validation Accuracy & Training Loss & Validation Loss \\
   \midrule
   No preprocessing & 0.639200 & 0.543100 & 0.771500 & 0.998300 \\
-  With Sobel Edge Detection only & 0.614500 & 0.586700 & 0.839800 & 1.010100 \\
-  With Data Augmentation only & 0.431100 & 0.543100 & 1.088000 & 0.983300 \\
-  both & 0.404100 & 0.411200 & 1.173300 & 1.111400 \\
+  Sobel Edge Detection (SED) only & 0.614500 & 0.586700 & 0.839800 & 1.010100 \\
+  Data Augmentation (DA) only & 0.431100 & 0.543100 & 1.088000 & 0.983300 \\
+  Both SED and DA & 0.404100 & 0.411200 & 1.173300 & 1.111400 \\
   \bottomrule
   \end{tabularx}
 \end{table*}
