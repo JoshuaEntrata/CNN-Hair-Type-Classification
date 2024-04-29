@@ -116,7 +116,7 @@ Following the initial experiment we made, we gained insights that helped us crea
   \label{fig:many_layers}
 \end{figure}
 
-This model's training and validation metrics, as depicted in Figure \ref{fig:many_layers_model}, demonstrate a noticeable improvement in performance compared to the simple model. The training accuracy shows a steady increase with less fluctuation, while the validation accuracy stabilizes. Similarly, the training and validation loss curves show a more consistent decrease, suggesting a better fit to the data.
+This model's training and validation metrics, as depicted in Figure \ref{fig:many_layers}, demonstrate a noticeable improvement in performance compared to the simple model. The training accuracy shows a steady increase with less fluctuation, while the validation accuracy stabilizes. Similarly, the training and validation loss curves show a more consistent decrease, suggesting a better fit to the data.
 
 It can be seen that there is a slight divergence of training and validation loss towards the later epochs, which may suggest the start of overfitting. We hypothesize that this could be resolved by adding dropout layers or introducing \texttt{BatchNormalization}.
 
@@ -159,14 +159,14 @@ In an effort to further refine our model, we implemented \texttt{Leaky ReLU} act
   \label{fig:leaky_relu}
 \end{figure}
 
-As illustrated in the training and validation plots (Figure \ref{fig:leaky_relu_model}), there is a wide gap between the training and validation curves. This model performed worse compared to the other models we developed earlier.
+As illustrated in the training and validation plots (Figure \ref{fig:leaky_relu}), there is a wide gap between the training and validation curves. This model performed worse compared to the other models we developed earlier.
 
 \subsubsection{Final Model}
 
 Leveraging the insights gained from our initial explorations, we have developed a final model aimed at surpassing the performance of our previous experiments. This final model represents a combination  of techniques and layer structures that we hypothesize to be optimal for maximizin classification accuracy while avoiding overfitting. The final architecture is structured as follows:
 
 \begin{enumerate}
-  \item A \(16 \times 16\) filter convolutional layer with ReLU activation and batch normalization.
+  \item A $16 \times 16$ filter convolutional layer with ReLU activation and batch normalization.
   \item Additional convolutional layers with increased filter counts and reduced kernel sizes, each paired with ReLU activation, batch normalization, and max pooling.
   \item Dropout layers implemented after pooling layers with a 0.25 dropout rate for the first two sets of convolutional layers.
   \item A sequence of a Global Average Pooling layer followed directly by a Flatten layer.
@@ -177,4 +177,4 @@ The final model's performance, as showin in Figure \ref{fig:sobel_edge_plots}, r
 
 \subsubsection{Optimizer Configuration}
 
-In optimizing our CNN model, we chose the Adam optimizer for its adaptability and efficiency with sparse gradients. We initially set the learning rate of \(1 \times 10^{-3}\) to test our experiments, but observed a tendency to overfit. According to Vishwakarma (2024) \cite{adam_optimizer}, the level recommended for balancing fast convergence and training stability is \(1 \times 10^{-4}\), which is why we used it throughout the recorded experiments. Additionally, the use of \texttt{categorical_crossentropy} is suitable for our model because we have a multi-class dataset.
+In optimizing our CNN model, we chose the Adam optimizer for its adaptability and efficiency with sparse gradients. We initially set the learning rate of $1 \times 10^{-3}$ to test our experiments, but observed a tendency to overfit. According to Vishwakarma (2024) \cite{adam_optimizer}, the level recommended for balancing fast convergence and training stability is \(1 \times 10^{-4}\), which is why we used it throughout the recorded experiments. Additionally, the use of \texttt{categorical\_crossentropy} is suitable for our model because we have a multi-class dataset.
