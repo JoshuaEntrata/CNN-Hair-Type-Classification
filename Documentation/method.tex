@@ -57,27 +57,19 @@ In this step, we constructed a convolutional neural network (CNN) model using th
 
 The architecture of our convolutional neural network (CNN) begins with the `Sequential` model framework from Keras, which allows layers to be added sequentially. 
 
-1. Input Layer: This layer specifies the shape of the input data, which is 256x256, and adds three color channgels (RGB), making it \(256, 256, 3\).
-
-2. Rescaling Layer: After the input layer, a \texttt{Rescaling} layer npormalizes the pixel values of the images from a range of 0 to 255 to a range of 0 to 1. This is important because it helps the model converge faster during the training stage.
-
-3. First Convolution Layer: This layer uses 16 filters with a kernel size of 16 and a stride of 2. We also did not added padding in the input (\texttt{valid padding}). The dilation rate is set to 1, which keeps the kernel compact.
-
-4. Activation Function: Every after convolution layer, a Rectified Linear Unit (ReLU) activation function is applied. This is used to introduce non-linearity to the model and solves the vanishing gradients issue.
-
-5. Batch Normalization: This normalization technique is applied to help standardizing the data by normalizing the activation of the convolution layer.
-
-6. Pooling Layer: After that, \texttt{MaxPooling2D} layer is applied to reduce the spatial dimentions of the output. It summarizes the features in a 2x2 window with the maximum value.
-
-7. Dropout Layer: A dropout layer is introduced with a rate of 0.25 to help prevent overfitting by randomly setting a fraction of input unit to 0 during training.
-
-8. Other Convolution Layers: The process above is repeated three more times with different filter and kernel sizes. The filters increase while the kernel size decrease as the process continue. For the last two convolution layers, max pooling and dropout were excluded.
-
-9. Global Average Pooling: After the last convolutional layers, a \texttt{GlobalAveragePooling2D} layer is applied, which calculates the average value of each feature map and outputs a tensor that is smaller in size. This can help reduce the dimensionality of the feature maps and prevent overfitting. 
-
-10. Flattening: After that, a \texttt{Flatten} layer then converts these features into a single vector. This helps maintain all the information from the feature maps and connect the convolutional layers to the fully connected layers.
-
-10. Dense and Output Layers: The feature vector coming from the Flattening layer is fed into a dense layer of 32 neurons, followed by a dropout layer with a rate of 0.5, and then an activation function of ReLU. The final output layer will consists of 3 neurons (one for each hair type) with a \texttt{softmax} activation function.
+\begin{enumerate}
+  \item Input Layer: This layer specifies the shape of the input data, which is 256x256, and adds three color channgels (RGB), making it \(256, 256, 3\).
+  \item Rescaling Layer: After the input layer, a \texttt{Rescaling} layer npormalizes the pixel values of the images from a range of 0 to 255 to a range of 0 to 1. This is important because it helps the model converge faster during the training stage.
+  \item First Convolution Layer: This layer uses 16 filters with a kernel size of 16 and a stride of 2. We also did not added padding in the input (\texttt{valid padding}). The dilation rate is set to 1, which keeps the kernel compact.
+  \item Activation Function: Every after convolution layer, a Rectified Linear Unit (ReLU) activation function is applied. This is used to introduce non-linearity to the model and solves the vanishing gradients issue.
+  \item Batch Normalization: This normalization technique is applied to help standardizing the data by normalizing the activation of the convolution layer.
+  \item Pooling Layer: After that, \texttt{MaxPooling2D} layer is applied to reduce the spatial dimentions of the output. It summarizes the features in a 2x2 window with the maximum value.
+  \item Dropout Layer: A dropout layer is introduced with a rate of 0.25 to help prevent overfitting by randomly setting a fraction of input unit to 0 during training.
+  \item Other Convolution Layers: The process above is repeated three more times with different filter and kernel sizes. The filters increase while the kernel size decrease as the process continue. For the last two convolution layers, max pooling and dropout were excluded.
+  \item Global Average Pooling: After the last convolutional layers, a \texttt{GlobalAveragePooling2D} layer is applied, which calculates the average value of each feature map and outputs a tensor that is smaller in size. This can help reduce the dimensionality of the feature maps and prevent overfitting. 
+  \item Flattening: After that, a \texttt{Flatten} layer then converts these features into a single vector. This helps maintain all the information from the feature maps and connect the convolutional layers to the fully connected layers.
+  \item Dense and Output Layers: The feature vector coming from the Flattening layer is fed into a dense layer of 32 neurons, followed by a dropout layer with a rate of 0.5, and then an activation function of ReLU. The final output layer will consists of 3 neurons (one for each hair type) with a \texttt{softmax} activation function.
+\end{enumerate}
 
 \subsubsection{Training the Model}
 
@@ -94,10 +86,10 @@ The model was compiled with the Adam optimizer, using a learning rate of $1e^{-4
 
 To evaluate the performance of the convolutional neural network, we utilized different techniques that visually and quantitavely assess its effectiveness:
 
-1. Accuracy and Loss Plots: We generated line plots to compare the training and valiation accuracy, as well as the training and validation loss over the epochs. These plots are important for us to understand the model's learning progress and see if it is overfitting or not.
+\begin{enumerate}
+  \item Accuracy and Loss Plots: We generated line plots to compare the training and valiation accuracy, as well as the training and validation loss over the epochs. These plots are important for us to understand the model's learning progress and see if it is overfitting or not.
+  \item Confusion Matrix: We created a confusion matrix from \texttt{sklearn.metrics} to visually inspect the performance of the model across different classes. It can also help us identify misclassifications in the model.
+  \item Classification Metrics Report: We utilized the \texttt{classification\_report} from \texttt{sklearn.metrics} to see the results of the precision, recall, and F1-score for each class. 
+  \item Image Prediction: Finally, to demonstrate the effectiveness of the model in predicting the hair type of the image, we used the \texttt{predict} method to see the percentage of each classes based on a single image.
+\end{enumerate}
 
-2. Confusion Matrix: We created a confusion matrix from \texttt{sklearn.metrics} to visually inspect the performance of the model across different classes. It can also help us identify misclassifications in the model.
-
-3. Classification Metrics Report: We utilized the \texttt{classification\_report} from \texttt{sklearn.metrics} to see the results of the precision, recall, and F1-score for each class. 
-
-4. Image Prediction: Finally, to demonstrate the effectiveness of the model in predicting the hair type of the image, we used the \texttt{predict} method to see the percentage of each classes based on a single image.
