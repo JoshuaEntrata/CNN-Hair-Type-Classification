@@ -29,21 +29,24 @@ The models were evaluated under four different preprocessing scenarios to assess
     \item Both Sobel Edge Detection and Data Augmentation
 \end{itemize}
 
-\begin{table*}[ht]
+\begin{table}[H]
   \centering
-  \caption{Comparative Results of Different Preprocessing Techniques}
+  \caption{Comparative Results of Different Preprocessing Techniques: none, Sobel Edge Detection only, data augmentation only, and both}
   \label{tab:preprocessing_results}
-  \begin{tabularx}{\linewidth}{c|>{\centering}X>{\centering}X>{\centering}X>{\centering\arraybackslash}X}
+  \begin{tabularx}{\linewidth}{>{\centering}X|>{\centering}X>{\centering}X>{\centering}X>{\centering\arraybackslash}X}
   \toprule
-  Preprocessing Scenario & Training Accuracy & Validation Accuracy & Training Loss & Validation Loss \\
+  & T Acc & Val Acc & T Loss & V Loss \\
   \midrule
-  No preprocessing & 0.639200 & 0.543100 & 0.771500 & 0.998300 \\
-  Sobel Edge Detection (SED) only & 0.614500 & 0.586700 & 0.839800 & 1.010100 \\
-  Data Augmentation (DA) only & 0.431100 & 0.543100 & 1.088000 & 0.983300 \\
-  Both SED and DA & 0.404100 & 0.411200 & 1.173300 & 1.111400 \\
+  None & 0.639200 & 0.543100 & 0.771500 & 0.998300 \\
+  \midrule
+  Sobel only & 0.614500 & 0.586700 & 0.839800 & 1.010100 \\
+  \midrule
+  Data Aug only & 0.431100 & 0.543100 & 1.088000 & 0.983300 \\
+  \midrule
+  Both & 0.404100 & 0.411200 & 1.173300 & 1.111400 \\
   \bottomrule
   \end{tabularx}
-\end{table*}
+\end{table}
 
 The results from each scenario are shown in the Table \ref{tab:preprocessing_results}. Alongside these numerical results, we also provided plots of accuracy and loss to better illustrate the models' tendencies to overfit or underfit.
 

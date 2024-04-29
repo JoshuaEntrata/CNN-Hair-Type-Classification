@@ -1,31 +1,15 @@
 \section{Discussion}
 
-\subsection{Idea}
+\subsection{Sobel Edge Detection and Highlighting hair Edges}
 
-\blindtext
+Training a neural network can be a very tricky task; a lot of interconnecting parts can easily influence the other. The influence of one simple can be seen from the experimentation in each part of the process. For example, in previous lab exercises, adding or removing just one preprocessing technique can often be seen as futile or irrelevant. Oftentimes, in order to truly leverage preprocessing in the old machine learning models, these techniques need to be combined together. However there is a limit to how much preprocessing one should apply to the data, as introducing more interpolation, variance, or overall noise can be detrimental to the performance of the machine learning model.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{figures/elden ring.jpg}
-    \caption{Elden Ring Picture}
-    \label{fig:hero}
-\end{figure}
+Using Table \ref{tab:preprocessing_results} as an example, using Sobel Edge Detection (SED), it reduces overfitting when using the model without any preprocessing methods as the baseline for metrics. While Sobel Edge Detection lowered the training accuracy by around 0.02, overfitting reduced by increasing the accuracy for the validation set by 0.04. Looking at the baseline model, the difference or distance between the accuracy of training and validation sets is much larger than the model that applied SED. 
 
-\subsection{Another Discussion}
+% TODO: add images of inputs
 
-\blindtext
+Sobel Edge Detection allows the CNN to easily capture the features better. Due to SED highlighting the edges in the images, the CNN takes advantage of this modification as it can better look at how the hair flows for each sample. Looking at Figure FIGURE, hairs are no exception to the SED, strands (especially those in the edge of the person's hair) are highlighted and emphasized in the image usually as a white color or something that is in complete contrast with the color assigned to non-edges. Kernels can find these more easily therefore train more easily ultimately leading to a better performance.
 
-\begin{figure}[H]
-    \centering
-    \begin{tikzpicture}
-        \begin{axis}[axis lines=middle, scaled y ticks=false]
-            \addplot [
-                domain=-1000:1000,
-                % samples=100,
-                color=red,
-                ]
-                {x^(-3)};
-        \end{axis}
-    \end{tikzpicture}
-    \caption{Plotting $x^{-3}$}
-\end{figure}
+\subsection{Data Augmentation and Noise}
+
+
