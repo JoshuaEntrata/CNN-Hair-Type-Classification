@@ -12,4 +12,8 @@ Sobel Edge Detection allows the CNN to easily capture the features better. Due t
 
 \subsection{Data Augmentation and Noise}
 
+Oftentimes data augmentation can be of help with machine learning models to better their performance in the task they were meant to do. But sometimes data augmentation can actually be harmful. Data augmentation can actually increase noise by variating data. Such data augmentations can be good to train a network similar to \cite{kim_adaptive_2021}'s work, however there needs to be a good foundation of having a good network. For a network to be robust to noise, it must be well modelled to be capable of being trained for robustness in the first place. Without a well built model, introducing noise can be detrimental as seen in the experimentations. Table \ref{tab:preprocessing_results} shows the effects of data augmentation to the model, in both cases where it is isolated and combined with Sobel Edge Detection, the model had performed worse. 
+
+\subsection{Overfitting}
+
 

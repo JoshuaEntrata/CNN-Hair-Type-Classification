@@ -178,3 +178,14 @@ The final model's performance, as showin in Figure \ref{fig:sobel_edge_plots}, r
 \subsubsection{Optimizer Configuration}
 
 In optimizing our CNN model, we chose the Adam optimizer for its adaptability and efficiency with sparse gradients. We initially set the learning rate of $1 \times 10^{-3}$ to test our experiments, but observed a tendency to overfit. According to Vishwakarma (2024) \cite{adam_optimizer}, the level recommended for balancing fast convergence and training stability is \(1 \times 10^{-4}\), which is why we used it throughout the recorded experiments. Additionally, the use of \texttt{categorical\_crossentropy} is suitable for our model because we have a multi-class dataset.
+
+\subsection{U-Net model}
+
+We have also tried to dabble with other architectures that have been proposed in the past for Convolutional Neural Networks. One architectur that we implemented is the U-Net architecture by \cite{ronneberger_u-net:_2015}. By following their simple architecture, without using any dropout layers, using different activation functions, etc. this model is actually able to achieve a good performance. As seen in figure \ref{unet}, the model is capable in its base form.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{figures/u_net.png}
+  \caption{U-Net Performance History}
+  \label{unet}
+\end{figure}
