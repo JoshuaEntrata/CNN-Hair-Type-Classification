@@ -14,9 +14,7 @@ The initial image size was set to $64 \times 64$ pixels. While this smaller dime
     \label{fig:image_sizes}
   \end{figure}
 
-Regarding the batch size, we experiments with sizes that are divisible by our image size, such as 32, 64, and 128. The batch size of 64 was chosen as it offers an efficient balance between minimizing the memory usage during training while providing a reliable estimate of the gradient. 
-
-For the batch size, we used 64. We tested using batch size of 128 and 32 for this model since they are all divisible by 256 which is the image size, but we opted to continue using 64 for a better balance of requiring less memory in training and the accuracy of the estimate of the gradient.
+Regarding the batch size, we experimented with sizes that are divisible by our image size, such as 32, 64, and 128. The batch size of 64 was chosen as it offers an efficient balance between minimizing the memory usage during training while providing a reliable estimate of the gradient. 
 
 \subsection{Preprocessing}
 
@@ -57,36 +55,123 @@ The results from each scenario are shown in the Table \ref{tab:preprocessing_res
 
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{figures/training_validation_results.png}
-  \caption{With Sobel Edge Detection only}
+  \caption{Sobel Edge Detection only}
   \label{fig:sobel_edge_plots}
 \end{figure}
 
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{figures/with_data_aug.png}
-  \caption{With Data Augmentation only}
+  \caption{Data Augmentation only}
   \label{fig:data_aug_plots}
 \end{figure}
 
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{figures/with_data_aug_and_sobel_edge.png}
-  \caption{With both Sobel Edge Detection and Data Augmentation}
+  \caption{Both Sobel Edge Detection and Data Augmentation}
   \label{fig:sobel_edge_and_data_aug_plots}
 \end{figure}
 
-The use of sobel edge detection help improved object detection and segmentation, notably improving hair boundary delineation in the images as seen in Figure \ref{fig:sobel_edge_and_data_aug_plots}. Given our dataset only consists of 987 valid images, data augmentation was important in addressing the limited data situation. Despite its benefits, the best model performance was obseved with Sobel Edge Detection only, leading us to exlude data augmentation in next phases.
+The use of sobel edge detection helped improve object detection and segmentation, notably enhancing hair boundary delineation in the images, as seen in Figure \ref{fig:sobel_edge_plots}. Given that our dataset consists of only 987 valid images, data augmentation was important in addressing the limited data situation. Despite its benefits, the best model performance was obseved with Sobel Edge Detection only, leading us to exlude data augmentation in next phases.
 
 \subsection{Modeling}
 
+In developing an effective CNN for our classification task, our goal was to strike a balance between a sufficient number of convolutional layers to capture relevant features and maintaining the model's complexity, which is good for generalizability. 
 
-% explain first the simple model. creating cnn model needs to find the balance between the appropriate amount of convolutional layers to be used and the complexity of the model. this is without dropout and batchnormalization
+\subsubsection{Create a Simple Model}
 
-%  we commonly use relu for activation function but what if we use leakyrelu. mention the pros of leakyrelu and show the performance
+Our initial model was designed to be simple, serving as our starting point for exploration and providing insights about the straightforward application of convolutional layers. It is structured as follows:
 
-%  using flatten only gives a very high training accuracy but at the expense of low validation accuracy. it always overfits so lets see the results
+\begin{enumerate}
+  \item Convolutional layers with filter sizes of \(16\), \(8\), and \(4\), and corresponding filter counts of \(8\), \(16\), and \(32\), each followed by ReLU activation.
+  \item A Global Average Pooling layer for dimensionality reduction.
+  \item A dense layer with \(32\) units for pattern learning.
+  \item A softmax output layer with \(3\) units for class prediction.
+\end{enumerate}
 
-%  we also tried experimenting with using many convolutional layers and using globalaverage pooling only. let's see thje results of using globalaveragepooling and this complex layers
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{figures/simple_model.png}
+  \caption{Accuracy and Loss Plots of the Simple Model}
+  \label{fig:simple_model}
+\end{figure}
 
-% discuss that there are scenarios that we can observe wherein the validation accuracy doesnt change in many epochs
+After training the simple CNN model, we observed in Figure \ref{fig:simple_model} that the accuracy are fluctuating, which could suggest the need for normalization and additional layers to prevent it in overfitting. Both the training and validation losses decrease over time, which indicates that the model is learning. However, there is still a tendency to underfit, suggesting that the model is still too simple. Thus, this needs more experimentation with additional layers to capture more complex patterns.
 
-% show the experiments that resulted to the creation of our model
+\subsubsection{Add More Layers}
 
+With insights gained from the simple model, we advanced our experimentation by increasing the model's complexity. We hypothesized that a greater number of convolutional layers would enable the capture of more patterns, which could be beneficial for the classification task, given the differences between hair types.
+
+Following the initial experiment we made, we gained insights that helped us create a better model to meet our objectives. We hypothesized that adding more convolutional layers would help the model capture more important patterns. Increasing its complexity could be beneficial for our classification task, given that the dataset has multiple classes. The new model is structured as follows:
+
+\begin{enumerate}
+  \item Convolutional blocks with \(3 \times 3\) filters, ReLU activations, and \(2 \times 2\) max pooling, increasing filter counts in a doubling pattern.
+  \item Global Average Pooling layer, a fully connected dense layer, and a softmax output layer, similar with the simple model architecture.
+\end{enumerate}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{figures/many_layers.png}
+  \caption{Accuracy and Loss Plots of the More Convolutional Layers Model}
+  \label{fig:many_layers}
+\end{figure}
+
+This model's training and validation metrics, as depicted in Figure \ref{fig:many_layers_model}, demonstrate a noticeable improvement in performance compared to the simple model. The training accuracy shows a steady increase with less fluctuation, while the validation accuracy stabilizes. Similarly, the training and validation loss curves show a more consistent decrease, suggesting a better fit to the data.
+
+It can be seen that there is a slight divergence of training and validation loss towards the later epochs, which may suggest the start of overfitting. We hypothesize that this could be resolved by adding dropout layers or introducing \texttt{BatchNormalization}.
+
+\subsubsection{Flatten and Dropout}
+
+We also wanted to evaluate the effects of using a \texttt{Flatten} layer in place of \texttt{GlobalAveragePooling2D}. This help us to retain all the information from the feature map. However, we are aware that using this can potentially cause overfitting, which is why we also implemented dropout layers. This modified architecture with \texttt{Flatten} and dropout layers is structured as follows:
+
+\begin{enumerate}
+  \item A series of convolutional layers with ReLU activations and batch normalization.
+  \item Dropout layers set at 0.25 following the first two convolutional layers.
+  \item A Flatten layer for vectorizing the feature maps before classification.
+  \item An expanded dense layer with 512 units for complex pattern learning.
+  \item A subsequent dropout layer with a rate of 0.5 following the dense layer.
+  \item A softmax output layer for probabilistic class predictions.
+\end{enumerate}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{figures/flatten_model.png}
+  \caption{Training and Validation Accuracy and Loss with Flatten and Dropout Layers}
+  \label{fig:flatten_model}
+\end{figure}
+
+In the training and validation plots (Figure \ref{fig:flatten_model}), we can see that the training accuracy significantly increased, approaching a high of nearly 0.90. However, the model still exhibits signs of overfitting, despite the application of dropout layers to mitigate this issue. This is evidenced by the widening gap between the training and validation plots.
+
+\subsubsection{Leaky ReLU}
+
+In an effort to further refine our model, we implemented \texttt{Leaky ReLU} activation in our convolutional layers. \texttt{Leaky ReLU} is designed to overcome the limitations of the \texttt{ReLU function}. The modified architecture with Leaky ReLU is structured as follows:
+
+\begin{enumerate}
+  \item Convolutional layers with Leaky ReLU activations set with an alpha of 0.1.
+  \item Batch normalization layers following each convolutional operation.
+  \item Dropout layers after sets of convolutional layers with a 0.25 rate.
+  \item A sequence of a Global Average Pooling layer followed by a Flatten layer.
+  \item A dense layer with a following dropout stage, leading to a softmax output layer.
+\end{enumerate}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{figures/leaky_relu.png}
+  \caption{Training and Validation Accuracy and Loss with Leaky ReLU}
+  \label{fig:leaky_relu}
+\end{figure}
+
+As illustrated in the training and validation plots (Figure \ref{fig:leaky_relu_model}), there is a wide gap between the training and validation curves. This model performed worse compared to the other models we developed earlier.
+
+\subsubsection{Final Model}
+
+Leveraging the insights gained from our initial explorations, we have developed a final model aimed at surpassing the performance of our previous experiments. This final model represents a combination  of techniques and layer structures that we hypothesize to be optimal for maximizin classification accuracy while avoiding overfitting. The final architecture is structured as follows:
+
+\begin{enumerate}
+  \item A \(16 \times 16\) filter convolutional layer with ReLU activation and batch normalization.
+  \item Additional convolutional layers with increased filter counts and reduced kernel sizes, each paired with ReLU activation, batch normalization, and max pooling.
+  \item Dropout layers implemented after pooling layers with a 0.25 dropout rate for the first two sets of convolutional layers.
+  \item A sequence of a Global Average Pooling layer followed directly by a Flatten layer.
+  \item A dense layer with 32 units, accompanied by a 0.5 dropout rate, culminating in a 3-unit softmax output layer.
+\end{enumerate}
+
+The final model's performance, as showin in Figure \ref{fig:sobel_edge_plots}, reflects the enhancements made during our experimentation phase. The accuracy plot reveals the most favorable outcomes compared to the prior models. It demonstrated the effectiveness of the modified CNN structure catered to our dataset. The integration of significant elements from prvious models, combined with additional fine-tuning, gave us an outcome that displays minimial overfitting compared to earlier versions. With this advanced model, we expected better results compared to others, which will be discussed in the next chapter. 
+
+\subsubsection{Optimizer Configuration}
+
+In optimizing our CNN model, we chose the Adam optimizer for its adaptability and efficiency with sparse gradients. We initially set the learning rate of \(1 \times 10^{-3}\) to test our experiments, but observed a tendency to overfit. According to Vishwakarma (2024) \cite{adam_optimizer}, the level recommended for balancing fast convergence and training stability is \(1 \times 10^{-4}\), which is why we used it throughout the recorded experiments. Additionally, the use of \texttt{categorical_crossentropy} is suitable for our model because we have a multi-class dataset.
